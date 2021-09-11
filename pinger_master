@@ -12,5 +12,4 @@ do
 	fi
 done < $TARGETS
 	sleep 600
-	pinger_plot
 done

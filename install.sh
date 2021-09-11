@@ -9,6 +9,7 @@ cp ./pinger /usr/bin/
 cp ./pinger_master /usr/bin/
 cp ./pinger_plot /usr/bin/
 cp ./liveplot.gnu /etc/pinger/
+cp ./pinger.logrotate /etc/logrotate.d/pinger
 if ! [ -f "/etc/pinger/targes.csv" ];then
 	cp ./targets.csv /etc/pinger/targets.csv
 fi

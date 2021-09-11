@@ -1,0 +1,11 @@
+/var/log/pinger/*.log {
+	rotate 30
+	daily
+	dateyesterday
+	dateext
+	missingok
+	nocompress
+	postrotate
+                pinger_plot
+        endscript
+}
