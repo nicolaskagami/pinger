@@ -1,0 +1,12 @@
+#!/bin/bash
+for LOGFILE in /var/log/pinger/*.log\.*
+do
+	DIR="/var/www/html/pinger/history/"$(date +"%Y" -r $LOGFILE)"/"$(date +"%m" -r $LOGFILE)
+	mkdir -p $DIR
+	PLOTFILE=$DIR"/"$(basename $LOGFILE).png
+	if ! [ -f $PLOTFILE ];
+	then
+		echo $LOGFILE $PLOTFILE
+		gnuplot -e "logfile='$LOGFILE'" -e "output ='$PLOTFILE'" /etc/pinger/liveplot.gnu
+	fi
+done

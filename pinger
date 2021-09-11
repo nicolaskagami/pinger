@@ -1,0 +1,11 @@
+#!/bin/bash
+while true
+do
+	NAME=$(echo $2 | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]')
+	LOGFILE="/var/log/pinger/$NAME.log"
+	PLOTFILE="/var/www/html/pinger/$NAME.png"
+	TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+	echo $TIMESTAMP,$(ping $1 -i 0.1 -c 550 -DO | tail -n2 | tr '\n' ' ' | sed 's/.*,\ \(.*\)\%.*= \([0-9]*\.[0-9]*\)\/\([0-9]*\.[0-9]*\)\/\([0-9]*\.[0-9]*\)\/\([0-9]*\.[0-9]*\).*/\1,\2,\3,\4\n/') >> $LOGFILE &
+	sleep 60
+	gnuplot -e "logfile='$LOGFILE'" -e "output ='$PLOTFILE'" /etc/pinger/liveplot.gnu &
+done
