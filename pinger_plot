@@ -1,5 +1,5 @@
 #!/bin/bash
-for LOGFILE in /var/log/pinger/*.log\.*
+for LOGFILE in /var/log/pinger/*.log\-*
 do
 	DIR="/var/www/html/pinger/history/"$(date +"%Y" -r $LOGFILE)"/"$(date +"%m" -r $LOGFILE)
 	mkdir -p $DIR
